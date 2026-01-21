@@ -31,7 +31,7 @@ const Login = () => {
             if (err.response?.status === 401) {
                 setError('Invalid email or password');
             } else if (err.message === 'Network Error' || err.code === 'ERR_NETWORK') {
-                setError('Cannot reach server. Make sure backend is running on port 5000');
+                setError('Cannot reach server. Please check your internet connection or if the backend is live.');
             } else if (err.message.includes('CORS')) {
                 setError('CORS error. Server CORS configuration issue.');
             } else {
@@ -162,8 +162,8 @@ style.textContent = `
   }
 `;
 if (!document.head.querySelector('style[data-login]')) {
-  style.setAttribute('data-login', 'true');
-  document.head.appendChild(style);
+    style.setAttribute('data-login', 'true');
+    document.head.appendChild(style);
 }
 
 export default Login;
