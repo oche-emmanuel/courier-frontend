@@ -1,0 +1,174 @@
+:root {
+  --primary-color: #002D72; /* Dark Blue */
+  --secondary-color: #FF6200; /* Vibrant Orange */
+  --text-dark: #1A1A1A;
+  --text-light: #F5F5F5;
+  --background-light: #F8F9FA;
+  --white: #FFFFFF;
+  --success: #28a745;
+  --error: #dc3545;
+  --transition-speed: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: #001f52;
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--white);
+}
+
+.btn-secondary:hover {
+  background-color: #e55800;
+  transform: translateY(-2px);
+}
+
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  transition: transform var(--transition-speed) ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  h1 {
+    font-size: 1.75rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 1.5rem !important;
+  }
+
+  h2 {
+    font-size: 1.25rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
+}
+
+/* Touch-friendly adjustments */
+@media (hover: none) {
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .card:active {
+    transform: translateY(-2px);
+  }
+}
+
