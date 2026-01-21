@@ -1,7 +1,5 @@
-services:
-  - type: web
-    name: courier-frontend
-    runtime: static
+staticSites:
+  - name: courier-frontend
     buildCommand: npm run build
     publishPath: dist
     routes:
