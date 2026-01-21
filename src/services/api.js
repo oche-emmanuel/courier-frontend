@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://courier-backend-77nd.onrender.com',
 });
 
 // Add a request interceptor to include the auth token
