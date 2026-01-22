@@ -6,27 +6,7 @@ export default defineConfig({
     plugins: [react()],
     server: {
         proxy: {
-            '/admin/create-shipment': {
-                target: 'http://localhost:5000',
-                changeOrigin: true,
-            },
-            '/admin/update-tracking': {
-                target: 'http://localhost:5000',
-                changeOrigin: true,
-            },
-            '/admin/all-shipments': {
-                target: 'http://localhost:5000',
-                changeOrigin: true,
-            },
-            '/admin/shipment': {
-                target: 'http://localhost:5000',
-                changeOrigin: true,
-            },
-            '/admin/profile': {
-                target: 'http://localhost:5000',
-                changeOrigin: true,
-            },
-            '/track/': {
+            '/api': {
                 target: 'http://localhost:5000',
                 changeOrigin: true,
             },

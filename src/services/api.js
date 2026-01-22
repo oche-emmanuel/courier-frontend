@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://courier-backend-77nd.onrender.com',
+    baseURL: (import.meta.env.VITE_API_URL || '') + '/api',
 });
 
 // Add a request interceptor to include the auth token
