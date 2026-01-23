@@ -9,7 +9,8 @@ const CreateShipment = () => {
         sender: { name: '', address: '', contact: '' },
         receiver: { name: '', address: '', contact: '' },
         origin: '',
-        destination: ''
+        destination: '',
+        expectedDeliveryDate: ''
     });
 
     const handleChange = (section, field, value) => {
@@ -98,6 +99,13 @@ const CreateShipment = () => {
                     </div>
                 </div>
 
+                <div style={styles.col}>
+                    <label style={styles.label}>Expected Delivery Date</label>
+                    <input type="date" style={styles.input} required
+                        value={formData.expectedDeliveryDate}
+                        onChange={(e) => handleChange(null, 'expectedDeliveryDate', e.target.value)} />
+                </div>
+
                 <button type="submit" className="btn btn-primary" style={{ marginTop: '2rem', width: '100%' }}>
                     <FaPaperPlane style={{ marginRight: '8px' }} /> Create Shipment
                 </button>
@@ -158,8 +166,8 @@ style.textContent = `
   }
 `;
 if (!document.head.querySelector('style[data-create-shipment]')) {
-  style.setAttribute('data-create-shipment', 'true');
-  document.head.appendChild(style);
+    style.setAttribute('data-create-shipment', 'true');
+    document.head.appendChild(style);
 }
 
 export default CreateShipment;

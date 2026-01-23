@@ -37,9 +37,22 @@ const TrackResult = () => {
         <div className="container fade-in" style={{ padding: '2rem 0' }}>
             <div className="card" style={{ maxWidth: '800px', margin: '0 auto' }}>
                 <div style={styles.header}>
-                    <div>
-                        <h2 style={{ color: 'var(--primary-color)' }}>Tracking: {shipment.trackingId}</h2>
-                        <p style={{ color: '#666' }}>Status: <strong>{shipment.currentStatus}</strong></p>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+                        <div>
+                            <h2 style={{ color: 'var(--primary-color)' }}>Tracking: {shipment.trackingId}</h2>
+                            <p style={{ color: '#666' }}>Status: <strong>{shipment.currentStatus}</strong></p>
+                        </div>
+                        <div style={{ textAlign: 'right', minWidth: '200px' }}>
+                            <p style={{ color: '#666', fontSize: '0.9rem' }}>Expected Delivery Date</p>
+                            <h3 style={{ color: 'var(--secondary-color)', margin: '5px 0' }}>
+                                {new Date(shipment.expectedDeliveryDate).toLocaleDateString(undefined, {
+                                    weekday: 'long',
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                })}
+                            </h3>
+                        </div>
                     </div>
                 </div>
 
@@ -184,8 +197,8 @@ style.textContent = `
   }
 `;
 if (!document.head.querySelector('style[data-track-result]')) {
-  style.setAttribute('data-track-result', 'true');
-  document.head.appendChild(style);
+    style.setAttribute('data-track-result', 'true');
+    document.head.appendChild(style);
 }
 
 export default TrackResult;

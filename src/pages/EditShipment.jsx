@@ -14,7 +14,8 @@ const EditShipment = () => {
         sender: { name: '', contact: '' },
         receiver: { name: '', address: '', contact: '' },
         currentStatus: '',
-        currentLocation: ''
+        currentLocation: '',
+        expectedDeliveryDate: ''
     });
 
     useEffect(() => {
@@ -31,7 +32,8 @@ const EditShipment = () => {
                     sender: data.sender,
                     receiver: data.receiver,
                     currentStatus: data.currentStatus,
-                    currentLocation: data.currentLocation
+                    currentLocation: data.currentLocation,
+                    expectedDeliveryDate: data.expectedDeliveryDate ? data.expectedDeliveryDate.split('T')[0] : ''
                 });
             } catch (err) {
                 setError('Failed to fetch shipment details');
@@ -162,6 +164,16 @@ const EditShipment = () => {
                                 />
                             </div>
                         </div>
+                        <div style={styles.formGroup}>
+                            <label style={styles.label}>Expected Delivery Date</label>
+                            <input
+                                type="date"
+                                value={formData.expectedDeliveryDate}
+                                onChange={(e) => setFormData({ ...formData, expectedDeliveryDate: e.target.value })}
+                                style={styles.input}
+                                required
+                            />
+                        </div>
                     </div>
 
                     <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '15px', marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
@@ -220,8 +232,8 @@ style.textContent = `
   }
 `;
 if (!document.head.querySelector('style[data-edit-shipment]')) {
-  style.setAttribute('data-edit-shipment', 'true');
-  document.head.appendChild(style);
+    style.setAttribute('data-edit-shipment', 'true');
+    document.head.appendChild(style);
 }
 
 export default EditShipment;
