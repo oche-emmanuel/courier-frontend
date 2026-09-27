@@ -9,34 +9,35 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setIsSubmitting(true);
         try {
-            console.log('Attempting login with:', { email, password: '***' });
-            const { data } = await api.post('/admin/login', { email, password });
-            console.log('Login successful:', data);
+            const { data } = await api.post('/admin/login', { email, password }, { timeout: 15000 });
+            if (!data || typeof data !== 'object' || !data.token) {
+                throw new Error('The server did not return a valid login response. Check the API URL and backend configuration.');
+            }
             login(data);
             navigate('/admin/dashboard');
         } catch (err) {
-            console.error('Login error details:', {
-                message: err.message,
-                status: err.response?.status,
-                data: err.response?.data,
-                config: err.config,
-            });
             if (err.response?.status === 401) {
                 setError('Invalid email or password');
+            } else if (err.code === 'ECONNABORTED') {
+                setError('The login request timed out. Check that the backend is running and the API URL is correct.');
             } else if (err.message === 'Network Error' || err.code === 'ERR_NETWORK') {
-                setError('Cannot reach server. Please check your internet connection or if the backend is live.');
+                setError('Cannot reach the login server. Check that the backend is running and the API URL is correct.');
             } else if (err.message.includes('CORS')) {
                 setError('CORS error. Server CORS configuration issue.');
             } else {
                 setError(err.response?.data?.message || err.message || 'Login failed. Please try again.');
             }
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -81,8 +82,8 @@ const Login = () => {
                             </button>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '15px' }}>
-                        Login
+                    <button type="submit" className="btn btn-primary" style={{ width: '100%', padding: '15px' }} disabled={isSubmitting}>
+                        {isSubmitting ? 'Signing in...' : 'Login'}
                     </button>
                     {/* <p style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.9rem', color: '#666' }}>
                         Default: admin@example.com / password123
