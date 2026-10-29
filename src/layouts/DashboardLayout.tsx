@@ -17,6 +17,7 @@ import {
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
+import WithdrawalNotification from '../components/WithdrawalNotification';
 
 const DashboardLayout = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -170,6 +171,8 @@ const DashboardLayout = () => {
                     </>
                 )}
             </AnimatePresence>
+
+            {user && <WithdrawalNotification />}
         </div>
     );
 };
